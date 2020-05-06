@@ -2,10 +2,11 @@
     "name": "english-for-kids",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "static/index.js",
     "dependencies": {
         "-": "0.0.1",
         "mdbootstrap": "^4.15.0",
+        "swiper": "^5.3.8",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.10.3"
     },
