@@ -37,3 +37,7 @@ h2 {
     word-wrap: break-word;
     margin-left: 70px !important;
 }
+
+.keyboard {
+    margin: auto;
+}

@@ -1,4 +1,3 @@
-//C: \Users\ idht\ Desktop\ projects\ MovieSearch\ node_modules\ swiper\ js\ swiper.js
 //var apikey = "ef4cf4c7";
 var apikey = "5c527664";
 
@@ -7,7 +6,7 @@ class Model {
         console.log("опции", options);
 
         if (options.Poster == "N/A")
-            this.img = "img/no_img.png"
+            this.img = "/movie/img/no_img.png"
         else
             this.img = options.Poster;
         this.title = options.Title,
@@ -153,4 +152,12 @@ mySwiper.on('slideChange', function() {
     }
 
 });
+
+import Keyboard from 'rss-virtual-keyboard';
+
+const kb = new Keyboard().init('.form-control', '.keyboard-container');
+kb.generateLayout();
+
+kb.on('Enter', () => console.log('Enter button pressed'));
+kb.on('Space', () => console.log('Space button pressed'));
 /*end*/
