@@ -114,7 +114,7 @@ var mySwiper = new Swiper('.swiper-container', {
     slidesPerGroup: 3,
     slidesPerGroupSkip: 1,
     breakpoints: {
-        480: {
+        20: {
             centeredSlidesBounds: true,
             slidesPerView: 1,
             slidesPerGroup: 1

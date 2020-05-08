@@ -127,3 +127,13 @@ h2 {
         margin-left: 31% !important;
     }
 }
+
+@media screen and (max-width: 510px) {
+    img {
+        margin-left: 20% !important;
+    }
+    h2 {
+        word-wrap: break-word;
+        margin-left: 20% !important;
+    }
+}
