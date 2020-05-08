@@ -8,7 +8,7 @@ class Model {
         console.log("опции", options);
 
         if (options.Poster == "N/A")
-            this.img = "/movie/img/no_img.png"
+            this.img = "../movie/img/no_img.png"
         else
             this.img = options.Poster;
         this.title = options.Title,
