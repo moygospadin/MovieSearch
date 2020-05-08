@@ -46,9 +46,10 @@ async function getInfo(id) {
 
 
 }
+const spinner = document.getElementsByClassName('spinner-border')[0];
 
 function getUrl(movie) {
-
+    spinner.classList.remove('d-none');
     var url = "https://www.omdbapi.com/?apikey=" + apikey + "&s=" + movie + "&page=";
     var movieAmountPage = 0;
     fetch(url + 1)
@@ -61,9 +62,13 @@ function getUrl(movie) {
             movieAmountPage = Math.floor(data.totalResults / 10) + 1;
 
 
-            if (!movieAmountPage) alert(data.Error);
-            else if (movieAmountPage > 70) alert('To many results')
-            else {
+            if (!movieAmountPage) {
+                alert(data.Error);
+                spinner.classList.add('d-none');
+            } else if (movieAmountPage > 70) {
+                alert('To many results');
+                spinner.classList.add('d-none');
+            } else {
                 console.log('srabotalo');
                 idCard(movieAmountPage, url);
             }
@@ -103,6 +108,7 @@ async function cardShow(movieData, page) {
             a.showResult();
         }
     }
+    spinner.classList.add('d-none');
 }
 
 var controller = function controller() {
@@ -129,7 +135,6 @@ document.getElementById('movieForm').addEventListener('submit', () => controller
 var mySwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
     loop: false,
-
     slidesPerView: 3,
     spaceBetween: 10,
     slidesPerGroup: 3,
@@ -141,6 +146,7 @@ var mySwiper = new Swiper('.swiper-container', {
             slidesPerGroup: 1
         },
         690: {
+            spaceBetween: 0,
             slidesPerView: 2,
             slidesPerGroup: 2
         },

@@ -33,8 +33,11 @@ img {
     margin-left: 70px !important;
     width: auto;
     overflow: hidden;
-    max-width: 189px;
-    height: 284px;
+    max-width: 232px;
+    height: 351px;
+    object-fit: cover;
+    object-position: 0 0;
+    vertical-align: middle;
 }
 
 h2 {
@@ -55,24 +58,27 @@ h2:hover {
     background-color: #ff3547 !important;
 }
 
+.form-group {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: calc(100% - 150px);
+}
+
 .form-control {
-    width: 94% !important;
-    float: left;
-    margin-bottom: 5px;
+    max-width: none;
+    margin: auto;
 }
 
 .fa-keyboard {
     font-size: 25px;
 }
 
-.btn-block {
-    width: 94%;
-}
-
 .btn-primary {
+    position: absolute;
     padding: 0 !important;
     width: 50px;
     height: 37px;
+    right: 91px;
     margin: 0 0 0px 9px !important
 }
 
@@ -93,40 +99,19 @@ h2:hover {
     top: 8%;
 }
 
-@media screen and (max-width: 1200px) {
-    .form-control {
-        width: 92% !important;
-    }
-    .btn-block {
-        width: 92%;
-    }
-}
-
-@media screen and (max-width: 1020px) {
-    .form-control {
-        width: 89% !important;
-    }
-    .btn-block {
-        width: 89%;
-    }
+.container {
+    max-width: 100%;
 }
 
 @media screen and (max-width: 800px) {
-    .form-control {
-        width: 87% !important;
-    }
-    .btn-block {
-        width: 87%;
+    img {
+        width: 228px;
+        margin-left: 42px !important;
+        max-height: 351px;
     }
 }
 
 @media screen and (max-width: 650px) {
-    .form-control {
-        width: 99% !important;
-    }
-    .btn-block {
-        width: 99%;
-    }
     .btn-primary {
         display: none;
     }
@@ -144,7 +129,9 @@ h2:hover {
 
 @media screen and (max-width: 510px) {
     img {
-        margin-left: 20% !important;
+        width: 200px;
+        margin-left: 17% !important;
+        max-height: 351px;
     }
     h2 {
         word-wrap: break-word;
@@ -162,4 +149,19 @@ h2:hover {
 [data-code="ArrowRight"],
 [data-code="Win"] {
     background: #4285f4 !important;
+}
+
+.spinner-border {
+    padding: 14px;
+    position: absolute;
+    right: 147px;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: .25em solid;
+    border-right: .25em solid transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
 }
