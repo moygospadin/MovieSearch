@@ -59,11 +59,14 @@ function getUrl(movie) {
             console.log(data);
 
             movieAmountPage = Math.floor(data.totalResults / 10) + 1;
+
+
             if (!movieAmountPage) alert(data.Error);
             else if (movieAmountPage > 70) alert('To many results')
-            else
+            else {
+                console.log('srabotalo');
                 idCard(movieAmountPage, url);
-
+            }
         }).catch((e) => {
             console.log("Ошибка");
             console.log(e);
@@ -75,8 +78,11 @@ function getUrl(movie) {
 var movieData = [];
 async function idCard(movieAmountPage, url) {
     movieData = [];
-
+    console.log(movieAmountPage);
+    if (movieAmountPage == 1) movieAmountPage++;
     for (let page = 1; movieAmountPage > page; page++) {
+        console.log('big');
+
         let response = await fetch(url + page);
         let data = await response.json();
         data.Search.forEach(el => {
@@ -84,11 +90,13 @@ async function idCard(movieAmountPage, url) {
         })
     }
     mySwiper.removeAllSlides();
+    console.log(movieData);
+
     cardShow(movieData, 1);
 }
 
 async function cardShow(movieData, page) {
-    for (let i = page; i < page + 12; i++) {
+    for (let i = page - 1; i < page + 12; i++) {
         if (i < movieData.length) {
             let param = await getInfo(movieData[i])
             let a = new Model(param);
@@ -121,6 +129,7 @@ document.getElementById('movieForm').addEventListener('submit', () => controller
 var mySwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
     loop: false,
+
     slidesPerView: 3,
     spaceBetween: 10,
     slidesPerGroup: 3,
@@ -184,7 +193,7 @@ keyboard.addEventListener("mousedown", () => {
 
     }
 });
-document.addEventListener('keydown', (event) => console.log(event));
+
 
 function runOnKeys(func, ...codes) {
 
