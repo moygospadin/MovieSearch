@@ -4,10 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "deploy": "npm run dev && netlify deploy --prod",
         "start": "webpack-dev-server",
         "dev": "webpack-dev-server --open",
         "prod": "webpack-dev-server —open —mode production",
         "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack -p"
     },
     "repository": {
         "type": "git",
