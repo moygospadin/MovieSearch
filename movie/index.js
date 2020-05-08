@@ -1,6 +1,8 @@
+"use strict";
 //var apikey = "ef4cf4c7";
 var apikey = "5c527664";
 
+import './style.css';
 class Model {
     constructor(options) {
         console.log("опции", options);
@@ -113,10 +115,11 @@ var mySwiper = new Swiper('.swiper-container', {
     slidesPerGroupSkip: 1,
     breakpoints: {
         480: {
+            centeredSlidesBounds: true,
             slidesPerView: 1,
             slidesPerGroup: 1
         },
-        640: {
+        690: {
             slidesPerView: 2,
             slidesPerGroup: 2
         },
@@ -154,10 +157,47 @@ mySwiper.on('slideChange', function() {
 });
 
 import Keyboard from 'rss-virtual-keyboard';
+const keyboard = document.getElementsByClassName('keyboard-img')[0];
 
 const kb = new Keyboard().init('.form-control', '.keyboard-container');
-kb.generateLayout();
 
+keyboard.addEventListener("mousedown", () => {
+
+    document.getElementsByClassName('keyboard-container')[0].classList.toggle('kb-block');
+    if (document.getElementsByClassName('keyboard-container')[0].classList.value == "keyboard-container") document.getElementsByClassName('keyboard-container')[0].innerHTML = "";
+    else kb.generateLayout();
+
+});
+console.log(kb);
+
+function runOnKeys(func, ...codes) {
+    let pressed = new Set();
+
+    document.addEventListener('keydown', function(event) {
+        pressed.add(event.code);
+
+
+        for (let code of codes) {
+            if (!pressed.has(code)) {
+                return;
+            }
+        }
+        pressed.clear();
+        func();
+    });
+
+    document.addEventListener('keyup', function(event) {
+        pressed.delete(event.code);
+    });
+
+}
+
+runOnKeys(
+    () => kb.switchLanguage(),
+    "ShiftLeft",
+    "AltLeft",
+
+);
 kb.on('Enter', () => console.log('Enter button pressed'));
 kb.on('Space', () => console.log('Space button pressed'));
 /*end*/

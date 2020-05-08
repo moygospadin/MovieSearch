@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+body {
+    background: white !important;
+}
+
 .card {
     width: 32%;
     margin-bottom: 20px;
@@ -40,4 +44,86 @@ h2 {
 
 .keyboard {
     margin: auto;
+}
+
+.form-control {
+    width: 94% !important;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.fa-keyboard {
+    font-size: 25px;
+}
+
+.btn-block {
+    width: 94%;
+}
+
+.btn-primary {
+    padding: 0 !important;
+    width: 50px;
+    height: 37px;
+    margin: 0 0 0px 9px !important
+}
+
+.kb-block {
+    display: block !important;
+}
+
+.keyboard-container {
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    z-index: 2;
+}
+
+@media screen and (max-width: 1200px) {
+    .form-control {
+        width: 92% !important;
+    }
+    .btn-block {
+        width: 92%;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    .form-control {
+        width: 89% !important;
+    }
+    .btn-block {
+        width: 89%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .form-control {
+        width: 87% !important;
+    }
+    .btn-block {
+        width: 87%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .form-control {
+        width: 99% !important;
+    }
+    .btn-block {
+        width: 99%;
+    }
+    .btn-primary {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    img {
+        margin-left: 31% !important;
+    }
+    h2 {
+        word-wrap: break-word;
+        margin-left: 31% !important;
+    }
 }
