@@ -40,10 +40,19 @@ img {
 h2 {
     word-wrap: break-word;
     margin-left: 70px !important;
+    height: 38px;
+    overflow: hidden;
+}
+
+h2:hover {
+    overflow: auto;
+    height: auto;
 }
 
 .keyboard {
     margin: auto;
+    border: none !important;
+    background-color: #ff3547 !important;
 }
 
 .form-control {
@@ -77,6 +86,11 @@ h2 {
     left: 50%;
     margin-left: -250px;
     z-index: 2;
+}
+
+.info {
+    position: absolute;
+    top: 8%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -136,4 +150,16 @@ h2 {
         word-wrap: break-word;
         margin-left: 20% !important;
     }
+}
+
+.keyboard__key {
+    background-color: #ff3547 !important;
+}
+
+[data-code="ArrowLeft"],
+[data-code="ArrowUp"],
+[data-code="ArrowDown"],
+[data-code="ArrowRight"],
+[data-code="Win"] {
+    background: #4285f4 !important;
 }

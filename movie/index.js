@@ -59,7 +59,8 @@ function getUrl(movie) {
             console.log(data);
 
             movieAmountPage = Math.floor(data.totalResults / 10) + 1;
-            if (!movieAmountPage || movieAmountPage > 70) alert('ошибка!')
+            if (!movieAmountPage) alert(data.Error);
+            else if (movieAmountPage > 70) alert('To many results')
             else
                 idCard(movieAmountPage, url);
 
@@ -91,22 +92,33 @@ async function cardShow(movieData, page) {
         if (i < movieData.length) {
             let param = await getInfo(movieData[i])
             let a = new Model(param);
-
             a.showResult();
         }
     }
 }
+
 var controller = function controller() {
     var movie = document.getElementById('movie').value;
+    var urlYandex = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200508T173205Z.ad231a2cd00028de.5caad0bb3d04c85a53c6ede494131fe80e58bfd6&text=${movie}&lang=ru-en`;
+
+    fetch(urlYandex)
+        .then(response => response.json())
+        .then(date => date.text.join(''))
+        .then((movie) => {
+            getUrl(movie);
+            document.getElementsByClassName('info')[0].innerText = `Showing results for ${movie}`;
+        })
+
+
+
     event.preventDefault();
-    getUrl(movie);
+
 
 }
 document.getElementById('movie').focus();
 document.getElementById('movieForm').addEventListener('submit', () => controller());
 
 var mySwiper = new Swiper('.swiper-container', {
-    // Optional parameters
     direction: 'horizontal',
     loop: false,
     slidesPerView: 3,
@@ -128,18 +140,15 @@ var mySwiper = new Swiper('.swiper-container', {
             slidesPerGroup: 3
         }
     },
-    // If we need pagination
+
     pagination: {
         el: '.swiper-pagination',
     },
 
-    // Navigation arrows
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
-
-    // And if we need scrollbar
     scrollbar: {
         el: '.swiper-scrollbar',
     },
@@ -159,24 +168,29 @@ mySwiper.on('slideChange', function() {
 import Keyboard from 'rss-virtual-keyboard';
 const keyboard = document.getElementsByClassName('keyboard-img')[0];
 
-const kb = new Keyboard().init('.form-control', '.keyboard-container');
+
+var kb = new Keyboard().init('.form-control', '.keyboard-container');
+
 
 keyboard.addEventListener("mousedown", () => {
 
     document.getElementsByClassName('keyboard-container')[0].classList.toggle('kb-block');
-    if (document.getElementsByClassName('keyboard-container')[0].classList.value == "keyboard-container") document.getElementsByClassName('keyboard-container')[0].innerHTML = "";
-    else kb.generateLayout();
+    if (document.getElementsByClassName('keyboard-container')[0].classList.value == "keyboard-container") {
+        document.getElementsByClassName('keyboard-container')[0].innerHTML = "";
+    } else {
 
+        kb.generateLayout();
+
+
+    }
 });
-console.log(kb);
+document.addEventListener('keydown', (event) => console.log(event));
 
 function runOnKeys(func, ...codes) {
-    let pressed = new Set();
 
+    let pressed = new Set();
     document.addEventListener('keydown', function(event) {
         pressed.add(event.code);
-
-
         for (let code of codes) {
             if (!pressed.has(code)) {
                 return;
@@ -185,7 +199,6 @@ function runOnKeys(func, ...codes) {
         pressed.clear();
         func();
     });
-
     document.addEventListener('keyup', function(event) {
         pressed.delete(event.code);
     });
@@ -196,8 +209,6 @@ runOnKeys(
     () => kb.switchLanguage(),
     "ShiftLeft",
     "AltLeft",
-
 );
-kb.on('Enter', () => console.log('Enter button pressed'));
-kb.on('Space', () => console.log('Space button pressed'));
+
 /*end*/
