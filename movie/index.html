@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieSearch</title>
+    <link rel="icon" href="/movie/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/movie/img/favicon.ico" type="image/x-icon" />
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center mt-5">Кинопоиск 0_0</h1>
+        <div class="form-group">
+            <input class="form-control" type="text" id="movie" placeholder="Movie...">
+            <!-- <button type="button" class="btn btn-primary"> <img class="keyboard-img" src="/movie/img/keyboard.svg" alt=""></button> -->
+            <button class="btn btn-primary">  <i class="keyboard-img far fa-keyboard"></i> </button>
+        </div>
+        <form id="movieForm" autocomplete="off">
+
+            <div class="form-group">
+                <button class="btn btn-danger btn-block">
+                    Search movie
+                </button>
+            </div>
+
+        </form>
+    </div>
+    <div class="keyboard-container"></div>
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide" style="width: 525px; margin-right: 10px;">
+                <a href="https://www.imdb.com/title/tt0056568">
+                    <h2>Term of Trial</h2>
+                </a>
+                <img src="https://m.media-amazon.com/images/M/MV5BMjc0ZDQ2YjEtYzZiZC00YWU2LTgwMGItM2YzOTViODgwYzM2XkEyXkFqcGdeQXVyMjI4MjA5MzA@._V1_SX300.jpg">
+                <h2>1962</h2>
+                <h2>7.1</h2>
+            </div>
+
+            <div class="swiper-slide" style="width: 525px; margin-right: 10px;">
+                <a href="https://www.imdb.com/title/tt0056568">
+                    <h2>Term of Trial</h2>
+                </a>
+                <img src="https://m.media-amazon.com/images/M/MV5BMjc0ZDQ2YjEtYzZiZC00YWU2LTgwMGItM2YzOTViODgwYzM2XkEyXkFqcGdeQXVyMjI4MjA5MzA@._V1_SX300.jpg">
+                <h2>1962</h2>
+                <h2>7.1</h2>
+            </div>
+
+            <div class="swiper-slide" style="width: 525px; margin-right: 10px;">
+                <a href="https://www.imdb.com/title/tt0056568">
+                    <h2>Term of Trial</h2>
+                </a>
+                <img src="https://m.media-amazon.com/images/M/MV5BMjc0ZDQ2YjEtYzZiZC00YWU2LTgwMGItM2YzOTViODgwYzM2XkEyXkFqcGdeQXVyMjI4MjA5MzA@._V1_SX300.jpg">
+                <h2>1962</h2>
+                <h2>7.1</h2>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+
+</body>
+
+</html>
