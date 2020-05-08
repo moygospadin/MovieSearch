@@ -3,6 +3,7 @@ require("babel-core/register");
 require("babel-polyfill");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 
@@ -34,6 +35,8 @@ module.exports = {
                 removeComments: true,
                 collapseWhitespace: true,
             },
-        }), new CleanWebpackPlugin()
+        }), new CleanWebpackPlugin(),
+        new CopyPlugin([{ from: './movie/img', to: './img' }])
+
     ]
 };
