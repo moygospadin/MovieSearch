@@ -38,7 +38,7 @@ class Model {
 
 async function getInfo(id) {
 
-    var url = "http://www.omdbapi.com/?apikey=" + apikey + "&i=" + id;
+    var url = "https://www.omdbapi.com/?apikey=" + apikey + "&i=" + id;
     let response = await fetch(url);
     let data = await response.json();
 
@@ -49,7 +49,7 @@ async function getInfo(id) {
 
 function getUrl(movie) {
 
-    var url = "http://www.omdbapi.com/?apikey=" + apikey + "&s=" + movie + "&page=";
+    var url = "https://www.omdbapi.com/?apikey=" + apikey + "&s=" + movie + "&page=";
     var movieAmountPage = 0;
     fetch(url + 1)
         .then((response) => {
@@ -59,7 +59,7 @@ function getUrl(movie) {
             console.log(data);
 
             movieAmountPage = Math.floor(data.totalResults / 10) + 1;
-            if (!movieAmountPage) alert('ошибка!')
+            if (!movieAmountPage || movieAmountPage > 70) alert('ошибка!')
             else
                 idCard(movieAmountPage, url);
 
