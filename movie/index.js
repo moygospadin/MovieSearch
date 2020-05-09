@@ -161,12 +161,10 @@ var mySwiper = new Swiper('.swiper-container', {
 
 
 mySwiper.on('slideChange', function() {
-    console.log(mySwiper.activeIndex);
-    console.log(mySwiper.slides.length);
-    console.log(totalResults);
+    console.log(mySwiper.slides.length - mySwiper.activeIndex);
 
 
-    if (mySwiper.activeIndex % 10 >= 7 && mySwiper.activeIndex != 0 && mySwiper.slides.length + 1 < totalResults) {
+    if (mySwiper.activeIndex % 10 >= 7 && mySwiper.activeIndex != 0 && mySwiper.slides.length + 1 < totalResults && mySwiper.slides.length - mySwiper.activeIndex < 20) {
         page++;
         getUrl(mov);
     }
