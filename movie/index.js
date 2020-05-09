@@ -23,10 +23,12 @@ class Model {
 
     getResult() {
         return `<div class="swiper-slide">
-        <a href="https://www.imdb.com/title/${this.link}"> <h2>${this.title}</h2></a>
-    <img  src="${this.img}"/>
-    <h2>${this.year}</h2>
-    <h2>${ this.rating}</h2>
+        <a href="https://www.imdb.com/title/${this.link}"> <h2>${this.title}</h2></a> <p class="fig">  <img  src="${this.img}"/></p>
+        <div class="more-inf"> 
+        <span>${this.year}</span>
+        <img class="film-star" src="/img/star.png">
+    <span>IMDb:${ this.rating}</span>
+    </div>
     </div>
     `;
 
@@ -42,23 +44,30 @@ class Model {
 
 const spinner = document.getElementsByClassName('spinner-border')[0];
 
-var i = 1;
+var page = 1;
 var mov;
 var totalResults;
 
 function getUrl(movie) {
+
     spinner.classList.remove('d-none');
     var url = "https://www.omdbapi.com/?apikey=" + apikey + "&s=" + movie + "&page=";
-    fetch(url + i)
+    fetch(url + page)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
-            if (data.Error == "Movie not found!") {
-                alert('Movie not found!');
+            if (data.Error == "Movie not found!") spinner.classList.add('d-none');
+            if (data.Error == "Movie not found!" && page == 1) {
+                document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
                 spinner.classList.add('d-none');
             } else {
                 totalResults = data.totalResults;
+                if (page == 1) {
+                    document.getElementsByClassName('info')[0].innerText = `Found ${totalResults} movies for the ${movie}`;
+                    mySwiper.removeAllSlides();
+                }
+
                 data.Search.forEach(el => getInfo(el.imdbID));
                 spinner.classList.add('d-none');
             }
@@ -82,7 +91,7 @@ async function getInfo(id) {
 
 
 var controller = function controller() {
-
+    page = 1;
     var movie = document.getElementById('movie').value;
     var urlYandex = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200508T173205Z.ad231a2cd00028de.5caad0bb3d04c85a53c6ede494131fe80e58bfd6&text=${movie}&lang=ru-en`;
     fetch(urlYandex)
@@ -90,12 +99,11 @@ var controller = function controller() {
         .then(date => date.text.join(''))
         .then((movie) => {
             mov = movie;
-            mySwiper.removeAllSlides();
             getUrl(movie);
-            document.getElementsByClassName('info')[0].innerText = `Showing results for ${movie}`;
+
         }).catch(e => {
             console.log(e);
-            alert("Неверный запрос");
+            document.getElementsByClassName('info')[0].innerText = 'Неверый запрос';
 
         })
 
@@ -138,6 +146,7 @@ var mySwiper = new Swiper('.swiper-container', {
 
     pagination: {
         el: '.swiper-pagination',
+        dynamicBullets: true
     },
 
     navigation: {
@@ -149,20 +158,22 @@ var mySwiper = new Swiper('.swiper-container', {
     },
 })
 
-var page = 0;
+
 
 mySwiper.on('slideChange', function() {
-    console.log(mySwiper.realIndex);
-    console.log(mySwiper.realIndex % 10 == 7);
+    console.log(mySwiper.activeIndex);
+    console.log(mySwiper.slides.length);
+    console.log(totalResults);
 
-    if (mySwiper.realIndex % 10 == 7 && mySwiper.realIndex + 3 < totalResults) {
-        i++;
+
+    if (mySwiper.activeIndex % 10 >= 7 && mySwiper.activeIndex != 0 && mySwiper.slides.length + 1 < totalResults) {
+        page++;
         getUrl(mov);
     }
 });
 
 import Keyboard from 'rss-virtual-keyboard';
-const keyboard = document.getElementsByClassName('keyboard-img')[0];
+const keyboard = document.getElementsByClassName('btn-primary1')[0];
 
 var kb = new Keyboard().init('.form-control', '.keyboard-container');
 
@@ -174,7 +185,10 @@ keyboard.addEventListener("mousedown", () => {
         kb.generateLayout();
     }
 });
+document.getElementsByClassName('btn-primary2')[0].addEventListener('click', () => {
+    document.querySelector('#movie').value = "";
 
+});
 
 function runOnKeys(func, ...codes) {
 
@@ -200,9 +214,9 @@ runOnKeys(
     "ShiftLeft",
     "AltLeft",
 );
-
+kb.on('Enter', () => controller());
 document.querySelector('.speak-btn').addEventListener('click', () => {
-    document.querySelector('#movie').value = "";
+
     document.querySelector('.speak-btn').classList.add('pulse');
     console.log(recognition);
 

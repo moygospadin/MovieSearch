@@ -30,7 +30,6 @@ body {
 }
 
 img {
-    margin-left: 70px !important;
     width: auto;
     overflow: hidden;
     max-width: 232px;
@@ -42,7 +41,7 @@ img {
 
 h2 {
     word-wrap: break-word;
-    margin-left: 70px !important;
+    text-align: center;
     height: 38px;
     overflow: hidden;
 }
@@ -50,6 +49,24 @@ h2 {
 h2:hover {
     overflow: auto;
     height: auto;
+}
+
+.film-star {
+    width: 35px;
+    height: 35px;
+    bottom: 5px;
+    left: 90px
+}
+
+.fig {
+    text-align: center;
+}
+
+span {
+    word-wrap: break-word;
+    height: 38px;
+    margin-right: 24px;
+    font-size: 25px;
 }
 
 .keyboard {
@@ -73,12 +90,24 @@ h2:hover {
     font-size: 25px;
 }
 
-.btn-primary {
+.btn-primary1 {
+    z-index: 4 !important;
     position: absolute;
     padding: 0 !important;
     width: 50px;
     height: 37px;
     right: 91px;
+    margin: 0 0 0px 9px !important
+}
+
+.btn-primary2 {
+    z-index: 4 !important;
+    position: absolute;
+    padding: 0 !important;
+    width: 37px;
+    height: 37px;
+    right: 145px;
+    border-radius: 50%;
     margin: 0 0 0px 9px !important
 }
 
@@ -95,47 +124,55 @@ h2:hover {
 }
 
 .info {
-    position: absolute;
-    top: 8%;
+    text-align: center;
+    margin: 0;
+    font-size: 25px;
+    margin-bottom: 9px;
+    color: #dc3545;
+    font-weight: bold;
 }
 
 .container {
     max-width: 100%;
 }
 
+.more-inf {
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width: 800px) {
     img {
         width: 228px;
-        margin-left: 42px !important;
         max-height: 351px;
     }
 }
 
 @media screen and (max-width: 650px) {
-    .btn-primary {
+    .btn-primary1 {
         display: none;
+    }
+    .btn-primary2 {
+        right: 94px;
+    }
+    .spinner-border {
+        right: 130px !important;
     }
 }
 
 @media screen and (max-width: 690px) {
-    img {
-        margin-left: 31% !important;
-    }
     h2 {
         word-wrap: break-word;
-        margin-left: 31% !important;
     }
 }
 
 @media screen and (max-width: 510px) {
     img {
         width: 200px;
-        margin-left: 17% !important;
         max-height: 351px;
     }
     h2 {
         word-wrap: break-word;
-        margin-left: 20% !important;
     }
 }
 
@@ -154,7 +191,7 @@ h2:hover {
 .spinner-border {
     padding: 14px;
     position: absolute;
-    right: 147px;
+    right: 194px;
     display: inline-block;
     width: 2rem;
     height: 2rem;
@@ -179,6 +216,10 @@ h2:hover {
     background-repeat: no-repeat;
     -webkit-transition-duration: .5s;
     transition-duration: .5s;
+}
+
+.fa-times-circle {
+    font-size: 33px;
 }
 
 .pulse {
