@@ -1,8 +1,12 @@
 "use strict";
 //var apikey = "ef4cf4c7";
 var apikey = "5c527664";
-
 import './style.css';
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new window.SpeechRecognition();
+recognition.interimResults = false;
+
 class Model {
     constructor(options) {
         console.log("опции", options);
@@ -121,6 +125,10 @@ var controller = function controller() {
         .then((movie) => {
             getUrl(movie);
             document.getElementsByClassName('info')[0].innerText = `Showing results for ${movie}`;
+        }).catch(e => {
+            console.log(e);
+            alert("Неверный запрос")
+
         })
 
 
@@ -132,6 +140,10 @@ var controller = function controller() {
 document.getElementById('movie').focus();
 document.getElementById('movieForm').addEventListener('submit', () => controller());
 
+document.addEventListener('keydown', () => {
+    if (event.key == "Enter") controller()
+
+});
 var mySwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
     loop: false,
@@ -226,4 +238,15 @@ runOnKeys(
     "AltLeft",
 );
 
-/*end*/
+document.querySelector('.speak-btn').addEventListener('click', () => {
+    document.querySelector('#movie').value = "";
+    document.querySelector('.speak-btn').classList.add('pulse');
+    recognition.start();
+});
+
+recognition.addEventListener('result', event => {
+        let transcript = Array.from(event.results).map((result) => result[0]).map((result) => result.transcript).join('');
+        document.querySelector('#movie').value = transcript;
+        document.querySelector('.speak-btn').classList.remove('pulse');
+    })
+    /*end*/

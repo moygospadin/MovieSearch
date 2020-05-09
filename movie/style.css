@@ -165,3 +165,51 @@ h2:hover {
     -webkit-animation: spinner-border .75s linear infinite;
     animation: spinner-border .75s linear infinite;
 }
+
+.speak-btn {
+    outline: none !important;
+    position: absolute;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    right: 34px;
+    background-color: #fff;
+    background-image: url(/img/microphone.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s;
+}
+
+.pulse {
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(125, 126, 255, 0.7);
+    animation: pulse 2s infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(125, 126, 255, 0.7);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(125, 126, 255, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(125, 126, 255, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(125, 126, 255, 0.7);
+        box-shadow: 0 0 0 0 rgba(125, 126, 255, 0.7);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(125, 126, 255, 0);
+        box-shadow: 0 0 0 10px rgba(125, 126, 255, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(125, 126, 255, 0);
+        box-shadow: 0 0 0 0 rgba(125, 126, 255, 0);
+    }
+}
