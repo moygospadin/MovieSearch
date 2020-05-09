@@ -65,7 +65,8 @@ function getUrl(movie) {
 
             movieAmountPage = Math.floor(data.totalResults / 10) + 1;
 
-
+            if (data.totalResults > 250) { alert("To many results");
+                spinner.classList.add('d-none'); } else
             if (!movieAmountPage) {
                 alert(data.Error);
                 spinner.classList.add('d-none');
