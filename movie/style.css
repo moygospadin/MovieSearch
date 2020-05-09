@@ -149,7 +149,7 @@ span {
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 640px) {
     .btn-primary1 {
         display: none;
     }
