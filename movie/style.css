@@ -145,6 +145,7 @@ span {
     img {
         width: 228px;
         max-height: 351px;
+        height: auto;
     }
 }
 
@@ -170,6 +171,7 @@ span {
     img {
         width: 200px;
         max-height: 351px;
+        height: auto;
     }
     h2 {
         word-wrap: break-word;
