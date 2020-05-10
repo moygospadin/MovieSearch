@@ -61,8 +61,8 @@ function getUrl(movie) {
 
             if (data.Response == "False") {
                 if (data.Error == "Too many results.") document.getElementsByClassName('info')[0].innerText = 'Too many results!';
-                if (data.Error == "Movie not found!") document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
-                if (data.Error == "Movie not found!" && page == 1) document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
+                if (data.Error == "Movie not found!") document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
+                if (data.Error == "Movie not found!" && page == 1) document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
                 setTimeout(() => spinner.classList.add('d-none'), 500);
                 pulseForInfoSpan();
 
@@ -114,7 +114,7 @@ var controller = function controller() {
 
         }).catch(e => {
             console.log(e);
-            document.getElementsByClassName('info')[0].innerText = 'Неверый запрос';
+            document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
             pulseForInfoSpan();
 
         })
