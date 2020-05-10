@@ -211,10 +211,15 @@
     }
     
     .info {
+        margin: 0 auto;
+        width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         text-align: center;
         font-size: 25px;
         color: #dc3545;
-        font-weight: bold;
+        font-weight: bold
     }
     
     .p-info {

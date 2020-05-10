@@ -57,7 +57,6 @@ function getUrl(movie) {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
 
             if (data.Response == "False") {
                 if (data.Error == "Too many results.") document.getElementsByClassName('info')[0].innerText = 'Too many results!';
@@ -79,8 +78,8 @@ function getUrl(movie) {
             }
         }).catch((e) => {
             console.log("Ошибка");
-            console.log(e);
-
+            document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
+            setTimeout(() => spinner.classList.add('d-none'), 800);
         });
 
 
@@ -113,7 +112,7 @@ var controller = function controller() {
             getUrl(movie);
 
         }).catch(e => {
-            console.log(e);
+
             document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
             pulseForInfoSpan();
 
@@ -173,8 +172,6 @@ var mySwiper = new Swiper('.swiper-container', {
 
 
 mySwiper.on('slideChange', function() {
-    console.log(mySwiper.activeIndex);
-    console.log(mySwiper.realIndex);
 
 
     if (mySwiper.activeIndex % 10 === 7 && mySwiper.activeIndex != 0 && mySwiper.activeIndex + 3 < totalResults) {
@@ -229,7 +226,7 @@ kb.on('Enter', () => controller());
 document.querySelector('.speak-btn').addEventListener('click', () => {
 
     document.querySelector('.speak-btn').classList.add('pulse');
-    console.log(recognition);
+
 
     recognition.start();
 });
