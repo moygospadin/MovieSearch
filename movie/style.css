@@ -4,7 +4,8 @@
     }
     
     body {
-        background: white !important;
+        min-height: 100%;
+        background-color: white !important;
     }
     
     .card {
@@ -88,7 +89,6 @@
         background-color: rgb(10, 186, 181, 0.1);
         text-align: center;
         min-height: 10vh;
-        /*border-bottom: 3px solid #ff3547;*/
     }
     
     .footer-line {
@@ -351,4 +351,23 @@
             -moz-box-shadow: 0 0 0 0 rgba(125, 126, 255, 0);
             box-shadow: 0 0 0 0 rgba(125, 126, 255, 0);
         }
+    }
+    
+    footer {
+        flex: 0 0 auto;
+    }
+    
+    .content {
+        flex: 1 0 auto;
+    }
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+    
+    html,
+    body {
+        height: 100%;
     }
