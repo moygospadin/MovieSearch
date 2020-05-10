@@ -26,7 +26,7 @@ class Model {
         <a href="https://www.imdb.com/title/${this.link}"> <h2>${this.title}</h2></a> <p class="fig">  <img  src="${this.img}"/></p>
         <div class="more-inf"> 
         <span>${this.year}</span>
-        <img class="film-star" src="/img/star.png">
+        <i class="fas fa-star"></i>
     <span>IMDb:${ this.rating}</span>
     </div>
     </div>
@@ -57,19 +57,25 @@ function getUrl(movie) {
             return response.json();
         })
         .then((data) => {
-            if (data.Error == "Movie not found!") spinner.classList.add('d-none');
-            if (data.Error == "Movie not found!" && page == 1) {
-                document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
-                spinner.classList.add('d-none');
+            console.log(data);
+
+            if (data.Response == "False") {
+                if (data.Error == "Too many results.") document.getElementsByClassName('info')[0].innerText = 'Too many results!';
+                if (data.Error == "Movie not found!") document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
+                if (data.Error == "Movie not found!" && page == 1) document.getElementsByClassName('info')[0].innerText = 'Movie not found!';
+                setTimeout(() => spinner.classList.add('d-none'), 500);
+                pulseForInfoSpan();
+
             } else {
                 totalResults = data.totalResults;
                 if (page == 1) {
+                    pulseForInfoSpan();
                     document.getElementsByClassName('info')[0].innerText = `Found ${totalResults} movies for the ${movie}`;
                     mySwiper.removeAllSlides();
                 }
 
                 data.Search.forEach(el => getInfo(el.imdbID));
-                spinner.classList.add('d-none');
+                setTimeout(() => spinner.classList.add('d-none'), 800);
             }
         }).catch((e) => {
             console.log("Ошибка");
@@ -80,6 +86,10 @@ function getUrl(movie) {
 
 }
 
+function pulseForInfoSpan() {
+    document.getElementsByClassName('info')[0].classList.add('pulse');
+    setTimeout(() => document.getElementsByClassName('info')[0].classList.remove('pulse'), 500)
+}
 async function getInfo(id) {
     var url = "https://www.omdbapi.com/?apikey=" + apikey + "&i=" + id;
     let response = await fetch(url);
@@ -93,6 +103,7 @@ async function getInfo(id) {
 var controller = function controller() {
     page = 1;
     var movie = document.getElementById('movie').value;
+    // if (!document.getElementById('movie').value.match(/\w/gi)) {
     var urlYandex = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200508T173205Z.ad231a2cd00028de.5caad0bb3d04c85a53c6ede494131fe80e58bfd6&text=${movie}&lang=ru-en`;
     fetch(urlYandex)
         .then(response => response.json())
@@ -104,10 +115,11 @@ var controller = function controller() {
         }).catch(e => {
             console.log(e);
             document.getElementsByClassName('info')[0].innerText = 'Неверый запрос';
+            pulseForInfoSpan();
 
         })
 
-
+    // }
 
     event.preventDefault();
 
@@ -125,8 +137,8 @@ var mySwiper = new Swiper('.swiper-container', {
     loop: false,
     slidesPerView: 3,
     spaceBetween: 10,
-    slidesPerGroup: 3,
-    slidesPerGroupSkip: 1,
+    //  slidesPerGroup: 3,
+    // slidesPerGroupSkip: 1,
     breakpoints: {
         20: {
             centeredSlidesBounds: true,
@@ -136,11 +148,11 @@ var mySwiper = new Swiper('.swiper-container', {
         690: {
             spaceBetween: 0,
             slidesPerView: 2,
-            slidesPerGroup: 2
+            // slidesPerGroup: 2
         },
         1200: {
             slidesPerView: 3,
-            slidesPerGroup: 3
+            // slidesPerGroup: 3
         }
     },
 
@@ -161,10 +173,11 @@ var mySwiper = new Swiper('.swiper-container', {
 
 
 mySwiper.on('slideChange', function() {
-    console.log(mySwiper.slides.length - mySwiper.activeIndex);
+    console.log(mySwiper.activeIndex);
+    console.log(mySwiper.realIndex);
 
 
-    if (mySwiper.activeIndex % 10 >= 7 && mySwiper.activeIndex != 0 && mySwiper.slides.length + 1 < totalResults && mySwiper.slides.length - mySwiper.activeIndex < 20) {
+    if (mySwiper.activeIndex % 10 === 7 && mySwiper.activeIndex != 0 && mySwiper.activeIndex + 3 < totalResults) {
         page++;
         getUrl(mov);
     }
@@ -227,4 +240,18 @@ recognition.addEventListener('result', event => {
     document.querySelector('.speak-btn').classList.remove('pulse');
 });
 recognition.addEventListener('end', () => document.querySelector('.speak-btn').classList.remove('pulse'));
+
+
+const titles = document.getElementsByClassName(".huj");
+
+for (let i = 0; i < titles.length; i++) {
+    titles[i].onmouseover = function() {
+        if (this.scrollHeight > this.offsetHeight) {
+            this.style.height = this.scrollHeight + "px"
+        }
+    };
+    titles[i].onmouseleave = function() {
+        this.style.height = ""
+    }
+}
 /*end*/
