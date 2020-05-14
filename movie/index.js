@@ -112,8 +112,10 @@ var controller = function controller() {
             getUrl(movie);
 
         }).catch(e => {
-
-            document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
+            console.log(e);
+            if (e == "TypeError: Failed to fetch") document.getElementsByClassName('info')[0].innerText = `No internet connection`;
+            else
+                document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
             pulseForInfoSpan();
 
         })
