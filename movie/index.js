@@ -60,7 +60,7 @@ function getUrl(movie) {
 
             if (data.Response == "False") {
                 if (data.Error == "Too many results.") document.getElementsByClassName('info')[0].innerText = 'Too many results!';
-                if (data.Error == "Movie not found!") document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
+
                 if (data.Error == "Movie not found!" && page == 1) document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
                 setTimeout(() => spinner.classList.add('d-none'), 500);
                 pulseForInfoSpan();
