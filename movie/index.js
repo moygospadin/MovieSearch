@@ -102,25 +102,29 @@ async function getInfo(id) {
 var controller = function controller() {
     page = 1;
     var movie = document.getElementById('movie').value;
-    // if (!document.getElementById('movie').value.match(/\w/gi)) {
-    var urlYandex = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200508T173205Z.ad231a2cd00028de.5caad0bb3d04c85a53c6ede494131fe80e58bfd6&text=${movie}&lang=ru-en`;
-    fetch(urlYandex)
-        .then(response => response.json())
-        .then(date => date.text.join(''))
-        .then((movie) => {
-            mov = movie;
-            getUrl(movie);
+    // if (movie == "" || movie == null || movie == undefined)
+    // console.log(movie == true);
 
-        }).catch(e => {
-            console.log(e);
-            if (e == "TypeError: Failed to fetch") document.getElementsByClassName('info')[0].innerText = `No internet connection`;
-            else
-                document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
-            pulseForInfoSpan();
+    if (movie) {
+        var urlYandex = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200508T173205Z.ad231a2cd00028de.5caad0bb3d04c85a53c6ede494131fe80e58bfd6&text=${movie}&lang=ru-en`;
+        fetch(urlYandex)
+            .then(response => response.json())
+            .then(date => date.text.join(''))
+            .then((movie) => {
+                mov = movie;
+                getUrl(movie);
 
-        })
+            }).catch(e => {
+                //  console.log(e);
+                if (e == "TypeError: Failed to fetch") document.getElementsByClassName('info')[0].innerText = `No internet connection`;
 
-    // }
+                else
+                    document.getElementsByClassName('info')[0].innerText = `No results for ${movie}`;
+                pulseForInfoSpan();
+
+            })
+
+    }
 
     event.preventDefault();
 
@@ -225,12 +229,15 @@ runOnKeys(
     "AltLeft",
 );
 kb.on('Enter', () => controller());
+var micro = true;
 document.querySelector('.speak-btn').addEventListener('click', () => {
 
     document.querySelector('.speak-btn').classList.add('pulse');
 
-
-    recognition.start();
+    if (micro) {
+        micro = false;
+        recognition.start();
+    }
 });
 
 recognition.addEventListener('result', event => {
@@ -238,7 +245,10 @@ recognition.addEventListener('result', event => {
     document.querySelector('#movie').value = transcript;
     document.querySelector('.speak-btn').classList.remove('pulse');
 });
-recognition.addEventListener('end', () => document.querySelector('.speak-btn').classList.remove('pulse'));
+recognition.addEventListener('end', () => {
+    document.querySelector('.speak-btn').classList.remove('pulse');
+    micro = true;
+});
 
 
 const titles = document.getElementsByClassName(".huj");
