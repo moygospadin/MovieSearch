@@ -40,7 +40,6 @@
         "webpack": "^4.43.0"
     },
     "dependencies": {
-        "-": "0.0.1",
         "mdbootstrap": "^4.17.0",
         "rss-virtual-keyboard": "^1.0.5",
         "swiper": "^5.3.8",
